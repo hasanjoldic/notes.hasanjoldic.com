@@ -1,0 +1,9 @@
+a {
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
