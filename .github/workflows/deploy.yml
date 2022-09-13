@@ -1,0 +1,20 @@
+name: deploy notes.enki.ba
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: | 
+            if cd /root/apps/notes.hasanjoldic.com; then git pull; 
+            else git clone git@github.com:hasanjoldic/notes.hasanjoldic.com.git /root/apps/notes.hasanjoldic.com; fi
+            cd /root/apps/notes.hasanjoldic.com && docker-compose up --build --detach
+          host: notes.hasanjoldic.com
+          username: root
+          privateKey: ${{ secrets.HASAN_JOLDIC_COM_PRIVATE_KEY }}
