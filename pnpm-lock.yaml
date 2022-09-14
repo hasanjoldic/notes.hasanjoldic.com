@@ -4,8 +4,8 @@ specifiers:
   '@babel/core': ^7.19.1
   '@emotion/react': ^11.10.4
   '@emotion/styled': ^11.10.4
-  '@hasan.joldic/components': ^0.3.11
-  '@hasan.joldic/theme': ^0.3.5
+  '@hasan.joldic/components': ^0.3.12
+  '@hasan.joldic/theme': ^0.3.6
   '@mui/icons-material': ^5.10.3
   '@mui/material': ^5.10.5
   '@next/bundle-analyzer': ^12.3.0
@@ -28,8 +28,8 @@ specifiers:
 dependencies:
   '@emotion/react': 11.10.4_roarvy33ly4edpxjner6w2fdle
   '@emotion/styled': 11.10.4_4qtvpe2rifqrvh5pltoorlxfta
-  '@hasan.joldic/components': 0.3.11_x27z5tbwky2cldjlblhpyjycou
-  '@hasan.joldic/theme': 0.3.5_v3yt77o2m2et4mvtnhx2sypkum
+  '@hasan.joldic/components': 0.3.12_x27z5tbwky2cldjlblhpyjycou
+  '@hasan.joldic/theme': 0.3.6_v3yt77o2m2et4mvtnhx2sypkum
   '@mui/icons-material': 5.10.3_te55cfmlqor73hc3llxkvwjmem
   '@mui/material': 5.10.5_pmt7mohamriu6nuiv5xnts3qce
   gray-matter: 4.0.3
@@ -407,12 +407,12 @@ packages:
       - supports-color
     dev: true
 
-  /@hasan.joldic/components/0.3.11_x27z5tbwky2cldjlblhpyjycou:
-    resolution: {integrity: sha512-lCYKdzlAMBKhN8SMj2p+8goo2xPmchVVV/A20GDxacUCpDjPq6raglBU+JTf+Jc0QqWpgmEohDfkgQQEjCgN3A==}
+  /@hasan.joldic/components/0.3.12_x27z5tbwky2cldjlblhpyjycou:
+    resolution: {integrity: sha512-PiqQ2jFtZaxRxhaSL0zLOh41m6KjEwiP/56NbtzzDTxSKDGpNwxaVMu0QbXsc4Yx2Nn88UjMa+qMxeaKjmCQTg==}
     dependencies:
       '@emotion/react': 11.10.4_roarvy33ly4edpxjner6w2fdle
       '@emotion/styled': 11.10.4_4qtvpe2rifqrvh5pltoorlxfta
-      '@hasan.joldic/theme': 0.3.5_v3yt77o2m2et4mvtnhx2sypkum
+      '@hasan.joldic/theme': 0.3.6_v3yt77o2m2et4mvtnhx2sypkum
       '@mui/icons-material': 5.10.3_te55cfmlqor73hc3llxkvwjmem
       '@mui/material': 5.10.5_pmt7mohamriu6nuiv5xnts3qce
       react: 18.2.0
@@ -422,8 +422,8 @@ packages:
       - '@types/react'
     dev: false
 
-  /@hasan.joldic/theme/0.3.5_v3yt77o2m2et4mvtnhx2sypkum:
-    resolution: {integrity: sha512-YYzuQlOqVHChHILa95Pux/YqZuJ4IyGalAqFN9zDVhuh2vJT7YIxkesn5z9BsuIEVEDnihCpoMlofx3V6gD02Q==}
+  /@hasan.joldic/theme/0.3.6_v3yt77o2m2et4mvtnhx2sypkum:
+    resolution: {integrity: sha512-mXGozaf1rcrUHLJ/r49C0q3WAm7cuccqyUdcfsQQrQWuQx1mQWiYftdEwNjll/xzblWnN2Wt9JW4fX0wea5b1g==}
     peerDependencies:
       '@babel/core': ^7.0.0
       '@emotion/react': ^11.0.0
