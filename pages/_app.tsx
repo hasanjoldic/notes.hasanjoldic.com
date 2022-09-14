@@ -1,27 +1,25 @@
 import type { AppContext, AppProps } from "next/app";
-import { useRouter } from "next/router";
 import Head from "next/head";
 
-import CssBaseline from "@mui/material/CssBaseline";
 import styled from "@mui/material/styles/styled";
 import type { PaletteMode } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
 
 import { ThemeProvider } from "@hasan.joldic/theme";
 import { Page } from "@hasan.joldic/components";
 
-import { themeOptions } from "../utils";
+import { useRouter } from "next/router";
 
-import "../styles/global.css";
+import "../styles/globals.css";
 
 const Content = styled("div")(({ theme }) => ({
   maxWidth: theme.breakpoints.values.lg,
 }));
 
-interface CustomProps {
+interface Props extends AppProps {
   paletteMode: PaletteMode;
 }
-
-interface Props extends AppProps, CustomProps {}
 
 const App = ({ Component, pageProps, paletteMode }: Props) => {
   const router = useRouter();
@@ -31,22 +29,22 @@ const App = ({ Component, pageProps, paletteMode }: Props) => {
   };
 
   return (
-    <>
+    <ThemeProvider paletteMode={paletteMode}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <meta name="description" content="Personal notes" />
         <title>Hasan Joldic</title>
       </Head>
-      <ThemeProvider themeOptions={themeOptions} paletteMode={paletteMode}>
-        <CssBaseline />
+
+      <CssBaseline />
+
+      <Box>
         <Page pages={[]} onNavigate={handleNavigate}>
           <Content>
             <Component {...pageProps} />
           </Content>
         </Page>
-      </ThemeProvider>
-    </>
+      </Box>
+    </ThemeProvider>
   );
 };
 
@@ -57,11 +55,11 @@ App.getInitialProps = async (context: AppContext) => {
   return { paletteMode } as unknown as Props;
 };
 
-export default App;
-
 function getCookie(name: string, cookie?: string) {
   return cookie
     ?.split(";")
     ?.find((row) => row.includes(name))
     ?.split("=")[1];
 }
+
+export default App;
