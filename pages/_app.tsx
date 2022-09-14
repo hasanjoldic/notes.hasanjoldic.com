@@ -28,8 +28,6 @@ const App = ({ Component, pageProps, paletteMode }: Props) => {
     router.push(path);
   };
 
-  console.log("App", paletteMode);
-
   return (
     <ThemeProvider paletteMode={paletteMode}>
       <Head>
@@ -51,7 +49,6 @@ const App = ({ Component, pageProps, paletteMode }: Props) => {
 };
 
 App.getInitialProps = async (context: AppContext) => {
-  console.log("App.getInitialProps", context.ctx.req?.headers.cookie);
   const paletteMode = getCookie("paletteMode", context.ctx.req?.headers.cookie);
 
   return { paletteMode } as unknown as Props;

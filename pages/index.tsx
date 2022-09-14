@@ -1,6 +1,6 @@
 import path from "path";
 
-import type { GetStaticProps, NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 
 import { TableOfContents } from "../components";
 import { getAllFiles } from "../utils/fs";
@@ -22,7 +22,7 @@ const Index: NextPage<Props> = ({ routes }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const mdDir = path.resolve(process.cwd(), "markdown");
   const routes = (await getAllFiles(mdDir))
     .map((file) => file.replace(/\.md$/, ""))

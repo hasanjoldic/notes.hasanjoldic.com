@@ -1,6 +1,6 @@
 import path from "path";
 
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
@@ -9,13 +9,7 @@ import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 
 import { parseMd } from "../../utils/md";
-import {
-  fileExists,
-  getAllFiles,
-  getAllFilesAndDirs,
-  isDir,
-  readFileContents,
-} from "../../utils/fs";
+import { fileExists, getAllFiles, readFileContents } from "../../utils/fs";
 import { Markdown, TableOfContents } from "../../components";
 
 export default function Note({
@@ -58,7 +52,7 @@ export default function Note({
   );
 }
 
-export const getStaticProps: GetStaticProps<
+export const getServerSideProps: GetServerSideProps<
   Awaited<ReturnType<typeof parseMd>>,
   { title: string[] }
 > = async ({ params }) => {
@@ -88,17 +82,17 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const mdDir = path.resolve(process.cwd(), "markdown");
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const mdDir = path.resolve(process.cwd(), "markdown");
 
-  const files = await getAllFilesAndDirs(mdDir);
+//   const files = await getAllFilesAndDirs(mdDir);
 
-  const paths = files.map((file) =>
-    file.replace(`${mdDir}/`, "").replace(/\.md$/, "")
-  );
+//   const paths = files.map((file) =>
+//     file.replace(`${mdDir}/`, "").replace(/\.md$/, "")
+//   );
 
-  return {
-    paths: paths.map((path) => ({ params: { title: path.split("/") } })),
-    fallback: false,
-  };
-};
+//   return {
+//     paths: paths.map((path) => ({ params: { title: path.split("/") } })),
+//     fallback: false,
+//   };
+// };
