@@ -1,6 +1,6 @@
 import type { AppContext, AppProps } from "next/app";
 import { useRouter } from "next/router";
-import { Html, Head } from "next/document";
+import Head from "next/head";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import styled from "@mui/material/styles/styled";
@@ -32,6 +32,12 @@ const App = ({ Component, pageProps, paletteMode }: Props) => {
 
   return (
     <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="description" content="Personal notes" />
+        <title>Hasan Joldic</title>
+      </Head>
       <ThemeProvider themeOptions={themeOptions} paletteMode={paletteMode}>
         <CssBaseline />
         <Page pages={[]} onNavigate={handleNavigate}>
