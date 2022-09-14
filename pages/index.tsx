@@ -15,7 +15,7 @@ const Index: NextPage<Props> = ({ routes }) => {
       <TableOfContents
         contents={routes.map((route) => ({
           title: route,
-          href: `/notes/${route}`,
+          href: `/notes${route}`,
         }))}
       />
     </main>

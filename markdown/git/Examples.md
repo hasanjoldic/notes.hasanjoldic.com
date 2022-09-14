@@ -13,3 +13,9 @@ Unstage files from the index [link](https://stackoverflow.com/questions/19730565
 ```terminal
 git reset HEAD -- path/to/file
 ```
+
+Remove last commit, keep changes
+
+```terminal
+git reset HEAD^
+```
