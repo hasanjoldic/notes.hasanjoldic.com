@@ -13,8 +13,8 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
-    "@hasan.joldic/components": "^0.3.9",
-    "@hasan.joldic/theme": "^0.3.3",
+    "@hasan.joldic/components": "^0.3.10",
+    "@hasan.joldic/theme": "^0.3.4",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.5",
     "gray-matter": "^4.0.3",
@@ -28,7 +28,7 @@
     "remark-rehype": "^10.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.0",
+    "@babel/core": "^7.19.1",
     "@next/bundle-analyzer": "^12.3.0",
     "@types/node": "18.7.6",
     "@types/react": "18.0.17",
