@@ -2,7 +2,8 @@ FROM node:16
 
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
+COPY package.json pnpm-lock.yaml* ./
+RUN npm install pnpm --global
 RUN pnpm install --frozen-lockfile
 
 COPY . .
