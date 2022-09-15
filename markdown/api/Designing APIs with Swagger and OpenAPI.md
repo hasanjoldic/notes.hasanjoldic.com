@@ -51,18 +51,44 @@ paths:
                       type: string
 ```
 
-This is what we know based now:
+This is what we know now:
 
-- The API is hosted at https://dog.ceo/api.
+- The API is hosted at [https://dog.ceo/api](https://dog.ceo/api).
 - There is a GET operation with the path `/breed/{breedName}/images`.
 - This path has a part called `breedName`, and it is a required string.
 - A successful response will give us a JSON array where each item is an object containing message and status fields.
 - The message field is an array of strings that are URLs of dog images.
 
-> HTTP requests can be written by hand using tools such as telnet for HTTP and OpenSSL for HTTPS.
+That is usable information. Developers can build clients to consume the API, product managers can determine if the API suits their needs and meets their standards, and documentation teams can use it as the basis for showing human-readable documentation. To use this OpenAPI definition, we could load it into a tool called Swagger UI which renders human-friendly documentation based on the definition and provides other small niceties.
+
+### What is Swagger?
+
+In the beginning there was Swagger UI and a rough guide for writing YAML files that described HTTP APIs. Later, more tools were built that relied on this guide, which soon became a specification and a standard. The tools and this specification were collectively known as “Swagger.” The specification grew more mature and was released as open source, which encouraged the community to create even more tools. They soon began to contribute features to the specification, which finally began to be adopted by large companies.
+
+In 2015 Swagger was adopted by SmartBear, which then donated the specification part to the Linux Foundation. During that transfer, the specification was renamed as the “OpenAPI specification,” and SmartBear retained the copyright for the term “Swagger.”
+
+### What about REST?
+
+**REST** (representational state transfer) is a collection of ideas about how to design networked systems (in particular, server/client systems). While REST is not restricted to HTTP-based APIs, they are both closely linked in practice. **RESTful APIs now drive the majority of web servers on the internet.**
+
+The principles of REST were outlined by Roy Fielding in his [dissertation](www.ics.uci.edu/~fielding/pubs/dissertation/top.html) on networked systems, which was released in the year 2000. Whether an API is RESTful or not is determined by how closely it adheres to the ideas (or constraints) of that dissertation. What is considered RESTful or not is a little subjective and sparks heated debates. Out in the wild, HTTP-based APIs have to make trade-offs between what they require and how standard or RESTful they are. It is a balancing act that all API producers have to manage.
+
+The ideas in REST aim to be simple and to decouple the API from the underlying services that serve the API. It uses a request-response model and is stateless, as all the information necessary to do something is contained within the request. One of the key ideas behind REST is that of a resource. Things such as user accounts, billing reminders, or even the weather in San Francisco are all resources, and each resource is identified by a URI. For a user’s account, we might have the URI `/users/123`, which uniquely identifies a user resource within the API.
+
+Consumers will want to be able to do things to and with resources. Think of these actions as verbs. HTTP has a set of well-defined ones, such as `POST`, `GET`, `PUT`, `DELETE`, and `PATCH`, all derived from the ideas in REST. In HTML, if you want to fetch data related to a resource, you would use the GET method. If you want to create a new resource, you could use the POST method.
+
+Where REST starts and HTTP ends is a tricky question to answer, but the rule of thumb is that HTTP is the protocol and REST is a way of designing APIs. HTTP has incorporated many of the ideas of REST into its protocol, which is why they are so closely related.
+
+## 3 - OpenAPI definitions
+
+When we formally describe an API, we’re turning the idea of that API into some data, which we call a definition. It differs from an informal description, which has no strict rules or syntactical structure. Informal descriptions are akin to documentation found on websites—great for humans to read, but hard for machines to decipher.
+
+> API descriptions fall on a scale from vague or useless to pedantically precise. The latter is preferred but it’s sometimes too expensive or impractical to produce, so the usual goal is to achieve a good balance. A good rule of thumb is to get the description to the point where developers are able to build a client without having access to the hosted API.
 
 The difference between formal and informal descriptions is whether they follow strict rules (a specification). A formal description can be more readily consumed by software, whereas informal descriptions cannot.
 OpenAPI is a formal specification for describing HTTP-based APIs. An OpenAPI definition is a YAML (or JSON) file that describes an HTTP API.
+
+> HTTP requests can be written by hand using tools such as telnet for HTTP and OpenSSL for HTTPS.
 
 **OpenAPI only supports the "JSON schema" flavor of YAML, which means it only supports the data types that JSON supports, and nothing more.**
 
@@ -86,12 +112,88 @@ info:
 paths: {}
 ```
 
-## 5 - HTTP responses
+## Using Swagger Editor to write OpenAPI definitions
 
-When describing a response in OpenAPI, you’ll need at least a status code and a description.
-If there is a response body, it must include at least one media type (such as `application/json`).
+We can use https://editor.swagger.io/ for live editing of OpenAPI specs.
+
+## 5 - Describing API responses
+
+**When describing a response in OpenAPI, you’ll need at least a status code and a description. If there is a response body, it must include at least one media type (such as `application/json`).**
+
+```yaml
+openapi: 3.0.3
+  # ...
+  paths:
+    /reviews:
+      get:
+        # ...
+        responses:
+          '200':
+            description: A bunch of reviews
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                        pattern: '^[0-9a-fA-F\-]{36}$'
+                      message:
+                        type: string
+                      rating:
+                        type: integer
+                        minimum: 1
+                        maximum: 5
+                      userId:
+                        type: string
+                        pattern: '^[0-9a-fA-F\-]{36}$'
+                        nullable: true
+```
+
+### JSON Schema
+
+SON Schema is a way to say what can and cannot be done with JSON.
+
+To describe the following JSON data:
+
+```json
+{
+  "rating": 3
+}
+```
+
+The `rating` field’s requirements:
+
+| Field  | Type   | Description                                                         | Limits                      |
+| ------ | ------ | ------------------------------------------------------------------- | --------------------------- |
+| rating | number | The rating of how good the experience was, with higher being better | 1–5 inclusive, whole number |
+
+We use this schema:
+
+```yaml
+type: object
+properties:
+  rating:
+    type: integer
+    minimum: 1
+    maximum: 5
+```
+
+According to a given schema, data can be valid or invalid. This is core to understanding JSON Schema. The use cases for schemas is large, but at their heart, they are all about validating data.
+
+Validating JSON against the simple object schema:
+
+| JSON          | Valid   | Description                                 |
+| ------------- | ------- | ------------------------------------------- |
+| {"rating": 3} | Valid   | It’s an object with a field.                |
+| "hello"       | Invalid | Expected an object but found a string.      |
+| {}            | Valid   | There’s nothing wrong with an empty object. |
 
 ### Status code categories
+
+Status codes are three-digit codes that we find in an HTTP response. They are three-digit numbers from 100 to 599 inclusive that indicate the high-level semantics of the response. Broadly speaking, we can think of these statuses as the success or failure of the request.
 
 | Range | Category      | Notes                                                                                |
 | ----- | ------------- | ------------------------------------------------------------------------------------ |
@@ -100,6 +202,64 @@ If there is a response body, it must include at least one media type (such as `a
 | 3xx   | Redirects     | The resource has a different location/URI.                                           |
 | 4xx   | Client error  | The client did something wrong, like misspell a resource or provide invalid details. |
 | 5xx   | Server error  | The server hit an error that isn’t a fault of the client.                            |
+
+### Media types (aka MIME)
+
+HTTP is a multimedia protocol, and it can handle requests and responses in many different formats. To indicate what format the data is in, it includes a header, typically `Content-Type`, with a media type as its value. Media types, or Multipurpose Internet Mail Extensions (MIME), are a way to indicate data formats. The list is standardized by the Internet Assigned Numbers Authority (IANA) and indicates what format a request (or response) body is in.
+These media types were adopted from the email standards, so you may see the terms “MIME” and “media type” used interchangeably. For most purposes they mean the same thing. It is preferred to use “media type” going forward, so that’s what we’ll do in this book.
+A media type has a `type` and a `subtype` and optional parameters (see the MDN article on MIME types for more info: http://mng.bz/GG7R). The type is the category, such as `text`, `audio`, `image`, `font`, etc.
+The subtype makes it concrete: `text/plain`, `image/png`, etc.
+
+Example of a response body definition:
+
+```yaml
+openapi: 3.0.3
+info:
+  title: FarmStall API
+  version: v1
+paths:
+  /reviews:
+    get:
+      description: Get a list of reviews
+      parameters:
+        - name: maxRating
+          in: query
+          schema:
+          type: number
+      responses:
+        "200":
+          description: A bunch of reviews
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    rating:
+                      type: integer
+                      minimum: 1
+                      maximum: 5
+                    message:
+                      type: string
+                    uuid:
+                      type: string
+                      pattern: '^[0-9a-fA-F\-]{36}$'
+                    userId:
+                      type: string
+                      pattern: '^[0-9a-fA-F\-]{36}$'
+                      nullable: true
+```
+
+## 6 - Creating resources
+
+Like response bodies, request bodies are described using OpenAPI’s JSON Schema
+variant and they require a media type to indicate the type of data being sent
+(application/json).
+
+There can only be one requestBody per operation, but each media type can describe its own shape, and each shape can be made to fit many different bodies (we’ll look into how that can be done in later chapters). **That means you could conceivably describe two randomly different bodies in the same operation if you so chose. That would be a poor design choice**, but there is merit in describing slightly different bodies to match the media types when required.
+
+Only some operations are allowed to have request bodies. The notable ones that aren’t allowed them are GET and DELETE. Technically you could include a request body for those operations, but the HTTP specification doesn’t like it, and servers that implement the specification to the letter should ignore those bodies, so don’t do it.
 
 ## 7 - Authentication and authorization
 
@@ -144,11 +304,20 @@ OpenAPI 3.0.x supports four categories of securities:
 - `apiKey`
 - `http`
 - `oauth2`
-- ``
+- `openIdConnect`
+
+- `apiKey - The most basic type of security is `apiKey`, which describes either a header, query
+  parameter, or cookie value as a way of authorizing the request.
 
 - `http` — The `http` type is for the HTTP Basic authentication scheme, which describes how to send a username and password through the Authorization HTTP header. It is specified in [RFC 7617](https://datatracker.ietf.org/doc/html/rfc7617). Just like `apiKey`, `http` doesn’t use scopes.
+
 - `oauth2` — The `oauth2` type is for the OAuth 2.0 protocol, which describes a process for delegated authentication. If you’ve ever been to a website and they asked you to log in with a third-party account (like Google or Facebook), you’ve experienced what’s often called the "OAuth dance." And if the third-party account asked you which information you wanted to share (such as your name and email), those are the _scopes_ that the API providers allow the API consumer to access. You can think of scopes as capabilities that are granted to a user of an API. After "dancing" between two websites, the API provider hands out a bearer access token that the API consumer can send through the Authorization HTTP header. OAuth is specified in [RFC 6749](https://datatracker.ietf.org/ doc/html/rfc6749), and there’s also a great website at [oauth.net](https://oauth.net/).
+
 - `openIdConnect` — The `openIdConnect` type is for the OpenID Connect protocol, which itself is an extension of OAuth 2.0.
+
+Parameters for API operations in OpenAPI are used to describe query strings, parts of the path, headers, and even cookies. Hence, it’s possible to describe an Authorization header as a parameter. The only reason we use security schemes instead is because they indicate our intent and semantics the header is not just any parameter but a parameter for security purposesand this allows tooling to interpret it as such.
+
+## 8 - Preparing and hosting API documentation
 
 ### Adding metadata
 
@@ -208,6 +377,29 @@ externalDocs:
   url: https://farmstall.designapis.com
   description: Hosted docs
 ```
+
+### Organizing operations with tags
+
+To help organize operations within an API definition, OpenAPI supports a feature called tags. One or more tags can be added to operations to better categorize and group different operations together. In the FarmStall API we have described five operations, and in this section we’re going to add a tag to each operation, grouping them together into Reviews operations and Users operations.
+
+In Swagger UI these tags will show up as sections, with the relevant operations grouped underneath each section. Using tags is a great way to organize related operations. Different tools can interpret tags in different ways.
+
+```yaml
+openapi: 3.0.0
+#...
+tags:
+  - name: Reviews
+    description: |
+      Reviews of your favourite/worst farm stalls
+paths:
+  /reviews:
+    get:
+      tags:
+        - Reviews
+      #...
+```
+
+## 9 - Designing a web application
 
 ### Referencing common schemas
 
