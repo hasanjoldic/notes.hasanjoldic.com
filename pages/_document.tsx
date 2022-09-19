@@ -1,3 +1,3 @@
-import Document from "@hasanjoldic/nextjs";
+import { Document } from "@hasanjoldic/nextjs";
 
 export default Document;

@@ -1,3 +1,3 @@
-import App from "@hasanjoldic/nextjs";
+import { App } from "@hasanjoldic/nextjs";
 
 export default App;
