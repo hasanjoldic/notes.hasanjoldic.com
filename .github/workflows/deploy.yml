@@ -15,8 +15,9 @@ jobs:
             if cd /root/apps/notes.hasanjoldic.com; then git pull; 
             else git clone git@github.com:hasanjoldic/notes.hasanjoldic.com.git /root/apps/notes.hasanjoldic.com; 
             fi
-            npm set registry https://npm.pkg.github.com/
-            npm set //npm.pkg.github.com/:_authToken ${{ secrets.GITHUB_TOKEN }}
+            echo "@hasanjoldic:registry=https://npm.pkg.github.com/" > .npmrc
+            echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+            git update-index --assume-unchanged .npmrc
             cd /root/apps/notes.hasanjoldic.com && docker-compose up --build --detach
           host: notes.hasanjoldic.com
           username: root
