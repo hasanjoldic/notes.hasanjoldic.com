@@ -1,10 +1,9 @@
 version: "3.7"
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     image: notes.hasanjoldic.com
+    container_name: notes.hasanjoldic.com
     restart: always
     ports:
       - 3020:3000
