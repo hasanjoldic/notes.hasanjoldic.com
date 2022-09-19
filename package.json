@@ -15,7 +15,7 @@
     "@emotion/styled": "^11.10.4",
     "@hasan.joldic/components": "^0.4.4",
     "@hasan.joldic/theme": "^0.4.1",
-    "@hasanjoldic/nextjs": "^0.2.2",
+    "@hasanjoldic/nextjs": "^0.2.3",
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.6",
     "gray-matter": "^4.0.3",
