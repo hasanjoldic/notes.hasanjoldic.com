@@ -3,19 +3,15 @@ title: "Agile"
 date: "2022-09-22"
 ---
 
-## Thoughts on agile
+# Thoughts on agile
 
 <br />
 
-<details>
-
-  <summary>Manifesto for Agile Software Development</summary>
+### Manifesto for Agile Software Development
 
 [principles](https://agilemanifesto.org/principles.html)
 
 [history](https://agilemanifesto.org/history.html)
-
-<hr />
 
 <div align="center">
 
