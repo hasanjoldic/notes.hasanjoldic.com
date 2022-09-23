@@ -7,7 +7,9 @@ date: "2022-09-22"
 
 <br />
 
-### Manifesto for Agile Software Development
+<details>
+
+  <summary>Manifesto for Agile Software Development</summary>
 
 [principles](https://agilemanifesto.org/principles.html)
 
@@ -58,9 +60,9 @@ date: "2022-09-22"
 
 - At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.
 
-</details>
-
 <hr />
+
+</details>
 
 Working in an agile way, in essence, means being adaptable to changes and not being rigid.
 

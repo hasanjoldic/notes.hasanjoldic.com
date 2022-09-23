@@ -3,6 +3,7 @@ import rehypeStringify from "rehype-stringify";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
+import remarkRaw from "rehype-raw";
 
 export async function parseMd(
   text: string
@@ -11,7 +12,8 @@ export async function parseMd(
 
   const processedContent = await remark()
     .use(remarkGfm)
-    .use(remarkRehype)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(remarkRaw)
     .use(rehypeStringify)
     .process(matterResult.content);
 
