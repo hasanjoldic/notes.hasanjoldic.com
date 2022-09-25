@@ -124,32 +124,32 @@ Scripting and rendering time should be shorter, and idle time longer for a bette
 
 Tests run for 10 seconds and I am showing the relative times.
 
-|                 | Material UI | Mantine |
-| --------------- | ----------- | ------- |
-| (1) - scripting | 21          | 58      |
-| (1) - rendering | 55          | 12      |
-| (1) - painting  | 3           | 3       |
-| (1) - system    | 11          | 6       |
-| (1) - idle      | **10**      | 21      |
-| (1) - fps       | 55          | 55      |
-| (2) - scripting | 35          | 15      |
-| (2) - rendering | 9           | 3       |
-| (2) - painting  | 0           | 0       |
-| (2) - system    | 0           | 0       |
-| (2) - idle      | 57          | **82**  |
-| (2) - fps       | 52          | 40      |
-| (3) - scripting | 11          | 14      |
-| (3) - rendering | 10          | 10      |
-| (3) - painting  | 5           | 3       |
-| (3) - system    | 2           | 4       |
-| (3) - idle      | 72          | 69      |
-| (3) - fps       | 58          | 58      |
-| (4) - scripting | 19          | 5       |
-| (4) - rendering | 3           | 4       |
-| (4) - painting  | 0           | 0       |
-| (4) - system    | 0           | 0       |
-| (4) - idle      | 88          | 91      |
-| (4) - fps       | 58          | 58      |
+|                 | Material UI | Mantine  |
+| --------------- | ----------- | -------- |
+| (1) - scripting | 21 %        | 58 %     |
+| (1) - rendering | 55 %        | 12 %     |
+| (1) - painting  | 3 %         | 3 %      |
+| (1) - system    | 11 %        | 6 %      |
+| (1) - idle      | **10** %    | 21 %     |
+| (1) - fps       | 55          | 55       |
+| (2) - scripting | 35 %        | 15 %     |
+| (2) - rendering | 9 %         | 3 %      |
+| (2) - painting  | 0 %         | 0 %      |
+| (2) - system    | 0 %         | 0 %      |
+| (2) - idle      | 57 %        | **82** % |
+| (2) - fps       | 52          | 40       |
+| (3) - scripting | 11 %        | 14 %     |
+| (3) - rendering | 10 %        | 10 %     |
+| (3) - painting  | 5 %         | 3 %      |
+| (3) - system    | 2 %         | 4 %      |
+| (3) - idle      | 72 %        | 69 %     |
+| (3) - fps       | 58          | 58       |
+| (4) - scripting | 19 %        | 5 %      |
+| (4) - rendering | 3 %         | 4 %      |
+| (4) - painting  | 0 %         | 0 %      |
+| (4) - system    | 0 %         | 0 %      |
+| (4) - idle      | 88 %        | 91 %     |
+| (4) - fps       | 58          | 58       |
 
 <br />
 
