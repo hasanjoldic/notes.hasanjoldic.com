@@ -26,6 +26,7 @@ interface Props {
 }
 
 export const TableOfContents: React.FC<Props> = ({ contents }) => {
+  if (!contents?.length) return null;
   return <List>{renderTOFLink(contents)}</List>;
   // return (
   //   <Accordion

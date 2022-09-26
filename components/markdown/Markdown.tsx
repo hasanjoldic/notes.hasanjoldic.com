@@ -10,7 +10,7 @@ interface Props extends Awaited<ReturnType<typeof parseMd>> {}
 
 export const Markdown: React.FC<Props> = ({ title, date, urls, html }) => {
   return (
-    <div>
+    <Box maxWidth="100%">
       <div>{date}</div>
       {urls?.map((url) => (
         <Box key={url}>
@@ -20,10 +20,11 @@ export const Markdown: React.FC<Props> = ({ title, date, urls, html }) => {
       <Box my={4}>
         <Divider />
       </Box>
-      <div
+      <Box
+        maxWidth="100%"
         className={styles.markdownContainer}
         dangerouslySetInnerHTML={{ __html: html }}
       />
-    </div>
+    </Box>
   );
 };

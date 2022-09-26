@@ -15,7 +15,7 @@
     "@emotion/styled": "^11.10.4",
     "@hasan.joldic/components": "^0.4.4",
     "@hasan.joldic/theme": "^0.4.1",
-    "@hasanjoldic/nextjs": "^0.2.4",
+    "@hasanjoldic/nextjs": "^0.2.6",
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.6",
     "gray-matter": "^4.0.3",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
-    "@next/bundle-analyzer": "^12.3.0",
+    "@next/bundle-analyzer": "^12.3.1",
     "@types/node": "18.7.6",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
