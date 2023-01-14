@@ -67,6 +67,7 @@ export const getServerSideProps: GetServerSideProps<
   const data = text ? await parseMd(text) : null;
 
   const dir = path.resolve(process.cwd(), "markdown", relativePath);
+
   const routes = (await getAllFiles(dir))
     .map((file) => file.replace(/\.md$/, ""))
     .map((file) => file.replace(`${dir}`, ""));
